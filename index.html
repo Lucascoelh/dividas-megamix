@@ -8,25 +8,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     
     <style>
-        /* Variáveis de Cores e Estilo */
+        /* Variáveis de Cores: Dark Mode com Destaque Amarelo (Logo GRUPO MEGA) */
         :root {
-            --cor-principal: #5B8FF9; /* Azul primário (Ação/Título) */
-            --cor-fundo-gradiente-clara: #F0F4F8; /* Fundo Principal */
-            --cor-fundo-gradiente-escura: #DCE5F0; /* Sombra sutil para o fundo */
-            --cor-fundo-superior: #A7C5F9; /* Azul para a área curva superior */
-            --cor-card: #FFFFFF;
-            --cor-sombra-clara: rgba(255, 255, 255, 0.7); 
-            --cor-sombra-escura: rgba(184, 194, 206, 0.6); 
-            --cor-texto-escuro: #334155; 
-            --cor-texto-claro: #64748B; 
+            --cor-principal: #FFC100; /* Amarelo Vibrante da logo (Ação/Título) */
+            --cor-botao-hover: #FFA000; /* Laranja/Amarelo mais escuro */
+            --cor-fundo-principal: #1F2937; /* Azul Marinho Escuro (Fundo do Body) */
+            --cor-fundo-superior: #2A3543; /* Azul Escuro Curvado (Topo) */
+            --cor-card: #374151; /* Azul Escuro Suave (Fundo da Caixa) */
+            --cor-texto-claro: #E5E7EB; /* Texto Principal (Claro) */
+            --cor-texto-secundario: #9CA3AF; /* Subtítulos/Rodapé */
+            --cor-sombra: rgba(0, 0, 0, 0.4); 
             --tempo-animacao: 0.8s; 
             --tempo-transicao: 0.25s; 
         }
 
         body {
             font-family: 'Inter', sans-serif; 
-            background: linear-gradient(145deg, var(--cor-fundo-gradiente-clara), var(--cor-fundo-gradiente-escura)); 
-            color: var(--cor-texto-escuro);
+            background-color: var(--cor-fundo-principal); 
+            color: var(--cor-texto-claro);
             margin: 0;
             padding: 0;
             display: flex;
@@ -35,22 +34,22 @@
             align-items: center;
             min-height: 100vh;
             overflow: hidden; 
-            position: relative; /* Necessário para o fundo curvado */
+            position: relative;
         }
         
-        /* NOVO: Pseudo-elemento para criar o design de topo curvado/ondulado */
+        /* Pseudo-elemento para criar o design de topo curvado/ondulado */
         body::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 45%; /* Altura da área de fundo */
+            height: 45%; 
             background-color: var(--cor-fundo-superior); 
             /* Cria a curva na parte inferior (similar ao design moderno) */
             border-bottom-left-radius: 50% 10%;
             border-bottom-right-radius: 50% 10%;
-            z-index: 1; /* Garante que fique atrás do conteúdo */
+            z-index: 1; 
         }
 
         .page-content {
@@ -58,26 +57,22 @@
             flex-direction: column;
             align-items: center;
             justify-content: center; 
-            /* Ajuste para mover o conteúdo um pouco mais para o centro/baixo */
             height: 100vh;
-            z-index: 2; /* Garante que o conteúdo fique sobre o fundo curvado */
+            z-index: 2; 
         }
 
         .login-box {
-            background-color: var(--cor-fundo-gradiente-clara); 
+            background-color: var(--cor-card); 
             padding: 45px 40px; 
             border-radius: 25px; 
-            box-shadow: 
-                6px 6px 12px var(--cor-sombra-escura),
-                -6px -6px 12px var(--cor-sombra-clara);
+            /* Sombra escura elegante */
+            box-shadow: 0 10px 25px var(--cor-sombra);
             text-align: center;
             width: 90%;
             max-width: 420px; 
             animation: fadeInScale var(--tempo-animacao) ease-out forwards; 
             z-index: 10;
             margin-bottom: 20px; 
-            /* Efeito de recorte superior (opcional, para reforçar o estilo) */
-            /* overflow: hidden; */ 
         }
 
         /* Animação de entrada */
@@ -102,14 +97,14 @@
         h1 {
             font-family: 'Playfair Display', serif; 
             font-size: 2.6em; 
-            color: var(--cor-principal); 
+            color: var(--cor-principal); /* Título em Amarelo */
             margin-bottom: 8px;
             font-weight: 700;
             letter-spacing: 0.8px;
         }
 
         p.subtitulo {
-            color: var(--cor-texto-claro);
+            color: var(--cor-texto-secundario);
             margin-bottom: 40px; 
             font-size: 1.0em;
         }
@@ -117,52 +112,52 @@
         input[type="password"] {
             width: 100%;
             padding: 16px 15px; 
-            border: none; 
-            background-color: var(--cor-fundo-gradiente-clara);
+            border: 1px solid var(--cor-fundo-superior); /* Borda sutil escura */
+            background-color: var(--cor-fundo-superior); /* Input ligeiramente mais escuro que a caixa */
             border-radius: 10px; 
             box-sizing: border-box;
             font-size: 1.1em;
             font-weight: 500;
-            color: var(--cor-texto-escuro);
-            /* Sombra "côncava" para o input (Afundado) */
-            box-shadow: inset 2px 2px 5px var(--cor-sombra-escura), inset -2px -2px 5px var(--cor-sombra-clara);
+            color: var(--cor-texto-claro);
             transition: all var(--tempo-transicao) ease-in-out;
         }
 
         input[type="password"]:focus {
             outline: none;
-            box-shadow: inset 1px 1px 3px var(--cor-sombra-escura), inset -1px -1px 3px var(--cor-sombra-clara);
+            /* Foco com borda amarela (Amarelo da Logo) */
+            border-color: var(--cor-principal); 
+            box-shadow: 0 0 0 2px var(--cor-principal);
         }
 
         button {
             width: 100%;
             padding: 16px;
-            background-color: var(--cor-principal); 
-            color: white;
+            background-color: var(--cor-principal); /* Botão em Amarelo */
+            color: var(--cor-fundo-principal); /* Texto do botão em Azul Escuro */
             border: none;
             border-radius: 10px; 
             font-size: 1.25em; 
-            font-weight: 600;
+            font-weight: 700; /* Mais negrito */
             cursor: pointer;
-            box-shadow: 2px 2px 5px rgba(91, 143, 249, 0.4); 
+            box-shadow: 0 5px 15px rgba(255, 193, 0, 0.5); /* Sombra Amarela */
             transition: all var(--tempo-transicao) ease; 
         }
 
         button:hover {
-            background-color: #4A7FD1; 
+            background-color: var(--cor-botao-hover); 
             transform: translateY(-2px); 
-            box-shadow: 4px 4px 10px rgba(91, 143, 249, 0.5);
+            box-shadow: 0 8px 20px rgba(255, 193, 0, 0.7);
         }
         
         button:active {
             transform: translateY(0); 
-            box-shadow: 1px 1px 3px rgba(91, 143, 249, 0.3);
-            background-color: #4A7FD1; 
+            box-shadow: 0 2px 5px rgba(255, 193, 0, 0.4);
+            background-color: var(--cor-botao-hover);
         }
 
         .mensagem-erro {
-            color: #E53E3E;
-            background-color: #FED7D7;
+            color: #FED7D7;
+            background-color: #A03232;
             border: 1px solid #FC8181;
             padding: 12px;
             border-radius: 8px;
@@ -180,7 +175,7 @@
 
         .footer-signature {
             margin-top: 20px; 
-            color: var(--cor-texto-claro);
+            color: var(--cor-texto-secundario);
             font-size: 0.9em;
             opacity: 0.8;
             text-align: center;
