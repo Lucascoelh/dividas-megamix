@@ -165,25 +165,26 @@
             background-color: var(--cor-botao-hover);
         }
 
-        /* ======================================================= */
-        /* MENSAGEM DE ERRO (CSS Corrigido para Visibilidade) */
+       /* ======================================================= */
+        /* MENSAGEM DE ERRO (FORÇANDO VISIBILIDADE) */
         /* ======================================================= */
         .mensagem-erro {
             color: #ff7b7b;
             font-size: 13px;
             text-align: center;
-            /* Removido o posicionamento absoluto para que ela flua normalmente dentro do FORM */
             margin-top: 10px; 
-            /* ESTADO INICIAL: Oculto */
+            /* Estado Inicial: Oculto */
             visibility: hidden; 
             opacity: 0;
-            transition: opacity 0.3s ease;
+            height: 0; /* Oculta totalmente o espaço */
+            transition: opacity 0.3s ease, height 0.3s ease;
         }
         
         .mensagem-erro.show {
-            /* ESTADO VISÍVEL */
-            visibility: visible;
-            opacity: 1;
+            /* ESTADO VISÍVEL: Forçamos a visibilidade e o espaço */
+            visibility: visible !important; /* FORÇA a exibição */
+            opacity: 1 !important;        /* FORÇA a opacidade */
+            height: auto !important;      /* Libera o espaço ocupado */
         }
 
         footer {
@@ -265,3 +266,4 @@
 
 </body>
 </html>
+
