@@ -11,20 +11,20 @@
         /* Variáveis de Cores e Estilo */
         :root {
             --cor-principal: #5B8FF9; /* Azul primário (Ação/Título) */
-            --cor-fundo-gradiente-clara: #F0F4F8; /* Fundo Quase Branco (Neumorfismo Suave) */
+            --cor-fundo-gradiente-clara: #F0F4F8; /* Fundo Principal */
             --cor-fundo-gradiente-escura: #DCE5F0; /* Sombra sutil para o fundo */
+            --cor-fundo-superior: #A7C5F9; /* Azul para a área curva superior */
             --cor-card: #FFFFFF;
-            --cor-sombra-clara: rgba(255, 255, 255, 0.7); /* Sombra clara (superior esquerda) */
-            --cor-sombra-escura: rgba(184, 194, 206, 0.6); /* Sombra escura (inferior direita) */
+            --cor-sombra-clara: rgba(255, 255, 255, 0.7); 
+            --cor-sombra-escura: rgba(184, 194, 206, 0.6); 
             --cor-texto-escuro: #334155; 
             --cor-texto-claro: #64748B; 
-            --tempo-animacao: 0.8s; /* Tempo de animação de entrada */
-            --tempo-transicao: 0.25s; /* Tempo de transição dos botões (Rápido para mobile) */
+            --tempo-animacao: 0.8s; 
+            --tempo-transicao: 0.25s; 
         }
 
         body {
             font-family: 'Inter', sans-serif; 
-            /* Gradiente de fundo soft-neumorphic */
             background: linear-gradient(145deg, var(--cor-fundo-gradiente-clara), var(--cor-fundo-gradiente-escura)); 
             color: var(--cor-texto-escuro);
             margin: 0;
@@ -35,6 +35,22 @@
             align-items: center;
             min-height: 100vh;
             overflow: hidden; 
+            position: relative; /* Necessário para o fundo curvado */
+        }
+        
+        /* NOVO: Pseudo-elemento para criar o design de topo curvado/ondulado */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 45%; /* Altura da área de fundo */
+            background-color: var(--cor-fundo-superior); 
+            /* Cria a curva na parte inferior (similar ao design moderno) */
+            border-bottom-left-radius: 50% 10%;
+            border-bottom-right-radius: 50% 10%;
+            z-index: 1; /* Garante que fique atrás do conteúdo */
         }
 
         .page-content {
@@ -42,27 +58,29 @@
             flex-direction: column;
             align-items: center;
             justify-content: center; 
+            /* Ajuste para mover o conteúdo um pouco mais para o centro/baixo */
             height: 100vh;
+            z-index: 2; /* Garante que o conteúdo fique sobre o fundo curvado */
         }
 
         .login-box {
             background-color: var(--cor-fundo-gradiente-clara); 
             padding: 45px 40px; 
             border-radius: 25px; 
-            /* Sombra suave e dupla para o efeito "macio" */
             box-shadow: 
                 6px 6px 12px var(--cor-sombra-escura),
                 -6px -6px 12px var(--cor-sombra-clara);
             text-align: center;
             width: 90%;
             max-width: 420px; 
-            /* Animação de entrada suave */
             animation: fadeInScale var(--tempo-animacao) ease-out forwards; 
             z-index: 10;
             margin-bottom: 20px; 
+            /* Efeito de recorte superior (opcional, para reforçar o estilo) */
+            /* overflow: hidden; */ 
         }
 
-        /* Animação de entrada (mais lento e suave) */
+        /* Animação de entrada */
         @keyframes fadeInScale {
             from { opacity: 0; transform: translateY(60px) scale(0.9); }
             to { opacity: 1; transform: translateY(0) scale(1); }
@@ -73,7 +91,6 @@
             to { opacity: 1; }
         }
         
-        /* Estilo para a Logo */
         .logo {
             max-width: 120px;
             height: auto;
@@ -114,7 +131,6 @@
 
         input[type="password"]:focus {
             outline: none;
-            /* Leve efeito de "empurrar" para dentro no foco */
             box-shadow: inset 1px 1px 3px var(--cor-sombra-escura), inset -1px -1px 3px var(--cor-sombra-clara);
         }
 
@@ -128,21 +144,17 @@
             font-size: 1.25em; 
             font-weight: 600;
             cursor: pointer;
-            /* Sombra padrão sutil para o botão */
             box-shadow: 2px 2px 5px rgba(91, 143, 249, 0.4); 
-            transition: all var(--tempo-transicao) ease; /* Transição rápida e estável */
+            transition: all var(--tempo-transicao) ease; 
         }
 
         button:hover {
             background-color: #4A7FD1; 
-            /* Movimento de "Lift" sutil para desktop */
             transform: translateY(-2px); 
             box-shadow: 4px 4px 10px rgba(91, 143, 249, 0.5);
         }
         
-        /* Ação de clique (ajustada para mobile) */
         button:active {
-            /* Simplesmente pressiona de volta, dando feedback tátil */
             transform: translateY(0); 
             box-shadow: 1px 1px 3px rgba(91, 143, 249, 0.3);
             background-color: #4A7FD1; 
