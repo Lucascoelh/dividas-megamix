@@ -60,7 +60,8 @@
         }
 
         .conteudo {
-            padding: 40px 30px 80px;
+            /* Adicionado padding-bottom maior para garantir espaço para a mensagem de erro */
+            padding: 40px 30px 100px; 
             color: var(--cor-texto-claro);
             position: relative;
             z-index: 2;
@@ -102,7 +103,8 @@
             border: none;
             border-bottom: 2px solid rgba(255, 255, 255, 0.2); 
             outline: none;
-            margin-bottom: 35px;
+            /* Reduzido o margin-bottom para a mensagem de erro ficar mais próxima */
+            margin-bottom: 10px; 
             transition: border-color 0.3s ease;
         }
 
@@ -164,13 +166,14 @@
         }
 
         /* ======================================================= */
-        /* MENSAGEM DE ERRO (CSS Corrigido) */
+        /* MENSAGEM DE ERRO (CSS Corrigido para Visibilidade) */
         /* ======================================================= */
         .mensagem-erro {
             color: #ff7b7b;
             font-size: 13px;
             text-align: center;
-            margin-top: -10px;
+            /* Removido o posicionamento absoluto para que ela flua normalmente dentro do FORM */
+            margin-top: 10px; 
             /* ESTADO INICIAL: Oculto */
             visibility: hidden; 
             opacity: 0;
