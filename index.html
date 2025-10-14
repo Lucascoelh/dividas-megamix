@@ -11,20 +11,20 @@
         /* Variáveis de Cores e Estilo */
         :root {
             --cor-principal: #5B8FF9; /* Azul primário (Ação/Título) */
-            --cor-fundo-gradiente-clara: #F0F4F8; /* Fundo Quase Branco (Melhor para sombras suaves) */
+            --cor-fundo-gradiente-clara: #F0F4F8; /* Fundo Quase Branco (Neumorfismo Suave) */
             --cor-fundo-gradiente-escura: #DCE5F0; /* Sombra sutil para o fundo */
             --cor-card: #FFFFFF;
             --cor-sombra-clara: rgba(255, 255, 255, 0.7); /* Sombra clara (superior esquerda) */
             --cor-sombra-escura: rgba(184, 194, 206, 0.6); /* Sombra escura (inferior direita) */
             --cor-texto-escuro: #334155; 
             --cor-texto-claro: #64748B; 
-            --tempo-animacao: 0.8s; /* Tempo de animação geral mais lento e suave */
-            --tempo-transicao: 0.3s;
+            --tempo-animacao: 0.8s; /* Tempo de animação de entrada */
+            --tempo-transicao: 0.25s; /* Tempo de transição dos botões (Rápido para mobile) */
         }
 
         body {
-            font-family: 'Inter', sans-serif; /* Fonte Inter é mais moderna e limpa que Montserrat */
-            /* Gradiente de fundo suave */
+            font-family: 'Inter', sans-serif; 
+            /* Gradiente de fundo soft-neumorphic */
             background: linear-gradient(145deg, var(--cor-fundo-gradiente-clara), var(--cor-fundo-gradiente-escura)); 
             color: var(--cor-texto-escuro);
             margin: 0;
@@ -46,9 +46,9 @@
         }
 
         .login-box {
-            background-color: var(--cor-fundo-gradiente-clara); /* Usa a cor do fundo para o efeito soft-neumorphic */
+            background-color: var(--cor-fundo-gradiente-clara); 
             padding: 45px 40px; 
-            border-radius: 25px; /* Mais arredondado */
+            border-radius: 25px; 
             /* Sombra suave e dupla para o efeito "macio" */
             box-shadow: 
                 6px 6px 12px var(--cor-sombra-escura),
@@ -78,7 +78,7 @@
             max-width: 120px;
             height: auto;
             margin-bottom: 25px;
-            animation: fadeIn 1s ease-out forwards; /* Logo com entrada suave */
+            animation: fadeIn 1s ease-out forwards; 
             animation-delay: 0.1s; 
         }
 
@@ -100,21 +100,21 @@
         input[type="password"] {
             width: 100%;
             padding: 16px 15px; 
-            border: none; /* Remove a borda padrão para o efeito soft-neumorphic */
+            border: none; 
             background-color: var(--cor-fundo-gradiente-clara);
             border-radius: 10px; 
             box-sizing: border-box;
             font-size: 1.1em;
             font-weight: 500;
             color: var(--cor-texto-escuro);
-            /* Sombra "côncava" para o input */
+            /* Sombra "côncava" para o input (Afundado) */
             box-shadow: inset 2px 2px 5px var(--cor-sombra-escura), inset -2px -2px 5px var(--cor-sombra-clara);
             transition: all var(--tempo-transicao) ease-in-out;
         }
 
         input[type="password"]:focus {
             outline: none;
-            /* Leve efeito de "empurrar" para dentro */
+            /* Leve efeito de "empurrar" para dentro no foco */
             box-shadow: inset 1px 1px 3px var(--cor-sombra-escura), inset -1px -1px 3px var(--cor-sombra-clara);
         }
 
@@ -128,20 +128,24 @@
             font-size: 1.25em; 
             font-weight: 600;
             cursor: pointer;
-            /* Sombra mais pronunciada para o botão (Botão "Lift") */
-            box-shadow: 4px 4px 10px rgba(91, 143, 249, 0.4); 
-            transition: all var(--tempo-transicao) cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            /* Sombra padrão sutil para o botão */
+            box-shadow: 2px 2px 5px rgba(91, 143, 249, 0.4); 
+            transition: all var(--tempo-transicao) ease; /* Transição rápida e estável */
         }
 
         button:hover {
             background-color: #4A7FD1; 
-            transform: translateY(-4px); /* Animação de "Lift" maior */
-            box-shadow: 8px 8px 20px rgba(91, 143, 249, 0.6); /* Sombra mais intensa no hover */
+            /* Movimento de "Lift" sutil para desktop */
+            transform: translateY(-2px); 
+            box-shadow: 4px 4px 10px rgba(91, 143, 249, 0.5);
         }
         
+        /* Ação de clique (ajustada para mobile) */
         button:active {
-            transform: translateY(-1px); /* Animação de "Push" sutil ao clicar */
-            box-shadow: 2px 2px 5px rgba(91, 143, 249, 0.4);
+            /* Simplesmente pressiona de volta, dando feedback tátil */
+            transform: translateY(0); 
+            box-shadow: 1px 1px 3px rgba(91, 143, 249, 0.3);
+            background-color: #4A7FD1; 
         }
 
         .mensagem-erro {
@@ -206,7 +210,7 @@
 
     <script>
         // =================================================================
-        // 1. CONFIGURAÇÃO DE SENHAS E LINKS (Funcionalidade de Redirecionamento)
+        // 1. CONFIGURAÇÃO DE SENHAS E LINKS
         // =================================================================
         const senhasELinks = {
             "1274": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzB1hnQZN3e3WF6e3h1i1Uzpp_iyTjFFj_RWybBKkB0XMTK178W6arjbFRh0WetmdOoDyxhjia6-m/pubhtml?gid=1522031752&single=true",
