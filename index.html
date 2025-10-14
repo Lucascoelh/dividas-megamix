@@ -5,25 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dívidas - Mega Mix</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     
     <style>
-        /* Variáveis de Cores: Mantendo o Azul Elegante e Suave */
+        /* Variáveis de Cores e Estilo */
         :root {
             --cor-principal: #5B8FF9; /* Azul primário (Ação/Título) */
-            --cor-fundo-gradiente-clara: #E0E7FF; /* Azul suave para o fundo */
-            --cor-fundo-gradiente-escura: #BFCBFF; /* Azul mais escuro para o fundo */
+            --cor-fundo-gradiente-clara: #F0F4F8; /* Fundo Quase Branco (Melhor para sombras suaves) */
+            --cor-fundo-gradiente-escura: #DCE5F0; /* Sombra sutil para o fundo */
             --cor-card: #FFFFFF;
-            --cor-sombra: rgba(0, 0, 0, 0.1);
+            --cor-sombra-clara: rgba(255, 255, 255, 0.7); /* Sombra clara (superior esquerda) */
+            --cor-sombra-escura: rgba(184, 194, 206, 0.6); /* Sombra escura (inferior direita) */
             --cor-texto-escuro: #334155; 
             --cor-texto-claro: #64748B; 
-            --tempo-animacao: 0.7s;
+            --tempo-animacao: 0.8s; /* Tempo de animação geral mais lento e suave */
+            --tempo-transicao: 0.3s;
         }
 
         body {
-            font-family: 'Montserrat', sans-serif;
-            /* Gradiente de fundo Azul Suave */
-            background: linear-gradient(135deg, var(--cor-fundo-gradiente-clara) 0%, var(--cor-fundo-gradiente-escura) 100%); 
+            font-family: 'Inter', sans-serif; /* Fonte Inter é mais moderna e limpa que Montserrat */
+            /* Gradiente de fundo suave */
+            background: linear-gradient(145deg, var(--cor-fundo-gradiente-clara), var(--cor-fundo-gradiente-escura)); 
             color: var(--cor-texto-escuro);
             margin: 0;
             padding: 0;
@@ -33,10 +35,8 @@
             align-items: center;
             min-height: 100vh;
             overflow: hidden; 
-            position: relative; 
         }
 
-        /* Container que centraliza a caixa de login E o rodapé */
         .page-content {
             display: flex;
             flex-direction: column;
@@ -46,22 +46,25 @@
         }
 
         .login-box {
-            background-color: var(--cor-card);
+            background-color: var(--cor-fundo-gradiente-clara); /* Usa a cor do fundo para o efeito soft-neumorphic */
             padding: 45px 40px; 
-            border-radius: 18px; 
-            box-shadow: 0 15px 40px var(--cor-sombra); 
+            border-radius: 25px; /* Mais arredondado */
+            /* Sombra suave e dupla para o efeito "macio" */
+            box-shadow: 
+                6px 6px 12px var(--cor-sombra-escura),
+                -6px -6px 12px var(--cor-sombra-clara);
             text-align: center;
             width: 90%;
             max-width: 420px; 
+            /* Animação de entrada suave */
             animation: fadeInScale var(--tempo-animacao) ease-out forwards; 
             z-index: 10;
-            /* Espaço para o rodapé logo abaixo */
             margin-bottom: 20px; 
         }
 
-        /* Animações */
+        /* Animação de entrada (mais lento e suave) */
         @keyframes fadeInScale {
-            from { opacity: 0; transform: translateY(40px) scale(0.95); }
+            from { opacity: 0; transform: translateY(60px) scale(0.9); }
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
         
@@ -72,10 +75,10 @@
         
         /* Estilo para a Logo */
         .logo {
-            max-width: 120px; /* Tamanho da logo */
+            max-width: 120px;
             height: auto;
-            margin-bottom: 25px; /* Espaço abaixo da logo */
-            animation: fadeIn 0.8s ease-out forwards;
+            margin-bottom: 25px;
+            animation: fadeIn 1s ease-out forwards; /* Logo com entrada suave */
             animation-delay: 0.1s; 
         }
 
@@ -86,7 +89,6 @@
             margin-bottom: 8px;
             font-weight: 700;
             letter-spacing: 0.8px;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.05); 
         }
 
         p.subtitulo {
@@ -98,20 +100,22 @@
         input[type="password"] {
             width: 100%;
             padding: 16px 15px; 
-            border: 2px solid #E0E0E0; 
+            border: none; /* Remove a borda padrão para o efeito soft-neumorphic */
+            background-color: var(--cor-fundo-gradiente-clara);
             border-radius: 10px; 
             box-sizing: border-box;
             font-size: 1.1em;
             font-weight: 500;
             color: var(--cor-texto-escuro);
-            transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.2s ease;
+            /* Sombra "côncava" para o input */
+            box-shadow: inset 2px 2px 5px var(--cor-sombra-escura), inset -2px -2px 5px var(--cor-sombra-clara);
+            transition: all var(--tempo-transicao) ease-in-out;
         }
 
         input[type="password"]:focus {
-            border-color: var(--cor-principal); 
-            box-shadow: 0 0 0 5px rgba(91, 143, 249, 0.3); 
             outline: none;
-            transform: translateY(-2px); 
+            /* Leve efeito de "empurrar" para dentro */
+            box-shadow: inset 1px 1px 3px var(--cor-sombra-escura), inset -1px -1px 3px var(--cor-sombra-clara);
         }
 
         button {
@@ -124,18 +128,20 @@
             font-size: 1.25em; 
             font-weight: 600;
             cursor: pointer;
-            box-shadow: 0 8px 20px rgba(91, 143, 249, 0.35); 
-            transition: background-color 0.3s ease, transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s ease;
+            /* Sombra mais pronunciada para o botão (Botão "Lift") */
+            box-shadow: 4px 4px 10px rgba(91, 143, 249, 0.4); 
+            transition: all var(--tempo-transicao) cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         button:hover {
             background-color: #4A7FD1; 
-            transform: translateY(-3px); 
-            box-shadow: 0 12px 25px rgba(91, 143, 249, 0.45);
+            transform: translateY(-4px); /* Animação de "Lift" maior */
+            box-shadow: 8px 8px 20px rgba(91, 143, 249, 0.6); /* Sombra mais intensa no hover */
         }
         
         button:active {
-            transform: translateY(0);
+            transform: translateY(-1px); /* Animação de "Push" sutil ao clicar */
+            box-shadow: 2px 2px 5px rgba(91, 143, 249, 0.4);
         }
 
         .mensagem-erro {
@@ -148,7 +154,7 @@
             font-weight: 500;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.5s ease, visibility 0.5s;
+            transition: opacity 0.5s ease;
         }
 
         .mensagem-erro.show {
@@ -200,10 +206,9 @@
 
     <script>
         // =================================================================
-        // 1. CONFIGURAÇÃO DE SENHAS E LINKS
+        // 1. CONFIGURAÇÃO DE SENHAS E LINKS (Funcionalidade de Redirecionamento)
         // =================================================================
         const senhasELinks = {
-            // Links das planilhas publicadas (pubhtml)
             "1274": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzB1hnQZN3e3WF6e3h1i1Uzpp_iyTjFFj_RWybBKkB0XMTK178W6arjbFRh0WetmdOoDyxhjia6-m/pubhtml?gid=1522031752&single=true",
             "9406": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzB1hnQZN3e3WF6e3h1i1Uzpp_iyTjFFj_RWybBKkB0XMTK178W6arjbFRh0WetmdOoDyxhjia6-m/pubhtml?gid=1634478111&single=true",
             "3168": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzB1hnQZN3e3WF6e3h1i1Uzpp_iyTjFFj_RWybBKkB0XMTK178W6arjbFRh0WetmdOoDyxhjia6-m/pubhtml?gid=1202405103&single=true",
