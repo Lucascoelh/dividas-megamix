@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dívidas - Mega Mix</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Variáveis de Cores: Mantendo o Azul Elegante e Suave */
+        :root {
+            --cor-principal: #5B8FF9; /* Azul primário (Ação/Título) */
+            --cor-fundo-gradiente-clara: #E0E7FF; /* Azul suave para o fundo */
+            --cor-fundo-gradiente-escura: #BFCBFF; /* Azul mais escuro para o fundo */
+            --cor-card: #FFFFFF;
+            --cor-sombra: rgba(0, 0, 0, 0.1);
+            --cor-texto-escuro: #334155; 
+            --cor-texto-claro: #64748B; 
+            --tempo-animacao: 0.7s;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            /* Gradiente de fundo Azul Suave */
+            background: linear-gradient(135deg, var(--cor-fundo-gradiente-clara) 0%, var(--cor-fundo-gradiente-escura) 100%); 
+            color: var(--cor-texto-escuro);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column; 
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden; 
+            position: relative; 
+        }
+
+        /* Container que centraliza a caixa de login E o rodapé */
+        .page-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; 
+            height: 100vh;
+        }
+
+        .login-box {
+            background-color: var(--cor-card);
+            padding: 45px 40px; 
+            border-radius: 18px; 
+            box-shadow: 0 15px 40px var(--cor-sombra); 
+            text-align: center;
+            width: 90%;
+            max-width: 420px; 
+            animation: fadeInScale var(--tempo-animacao) ease-out forwards; 
+            z-index: 10;
+            /* Espaço para o rodapé logo abaixo */
+            margin-bottom: 20px; 
+        }
+
+        /* Animações */
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: translateY(40px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Estilo para a Logo */
+        .logo {
+            max-width: 120px; /* Tamanho da logo */
+            height: auto;
+            margin-bottom: 25px; /* Espaço abaixo da logo */
+            animation: fadeIn 0.8s ease-out forwards;
+            animation-delay: 0.1s; 
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif; 
+            font-size: 2.6em; 
+            color: var(--cor-principal); 
+            margin-bottom: 8px;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.05); 
+        }
+
+        p.subtitulo {
+            color: var(--cor-texto-claro);
+            margin-bottom: 40px; 
+            font-size: 1.0em;
+        }
+
+        input[type="password"] {
+            width: 100%;
+            padding: 16px 15px; 
+            border: 2px solid #E0E0E0; 
+            border-radius: 10px; 
+            box-sizing: border-box;
+            font-size: 1.1em;
+            font-weight: 500;
+            color: var(--cor-texto-escuro);
+            transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.2s ease;
+        }
+
+        input[type="password"]:focus {
+            border-color: var(--cor-principal); 
+            box-shadow: 0 0 0 5px rgba(91, 143, 249, 0.3); 
+            outline: none;
+            transform: translateY(-2px); 
+        }
+
+        button {
+            width: 100%;
+            padding: 16px;
+            background-color: var(--cor-principal); 
+            color: white;
+            border: none;
+            border-radius: 10px; 
+            font-size: 1.25em; 
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(91, 143, 249, 0.35); 
+            transition: background-color 0.3s ease, transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #4A7FD1; 
+            transform: translateY(-3px); 
+            box-shadow: 0 12px 25px rgba(91, 143, 249, 0.45);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+
+        .mensagem-erro {
+            color: #E53E3E;
+            background-color: #FED7D7;
+            border: 1px solid #FC8181;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 25px;
+            font-weight: 500;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s;
+        }
+
+        .mensagem-erro.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .footer-signature {
+            margin-top: 20px; 
+            color: var(--cor-texto-claro);
+            font-size: 0.9em;
+            opacity: 0.8;
+            text-align: center;
+            animation: fadeIn 0.7s ease-out forwards; 
+            animation-delay: 0.3s;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="page-content">
+        <div class="login-box">
+            <header>
+                
+                <img src="GRUPO.png" alt="Grupo Mega Logo" class="logo">
+                
+                <h1>Dívidas - Mega Mix</h1>
+                <p class="subtitulo">Acesse seu extrato digitando sua senha pessoal.</p>
+            </header>
+
+            <form id="loginForm">
+                <div class="input-group">
+                    <input type="password" id="senha" placeholder="Digite sua senha (4 dígitos)" maxlength="4" required>
+                </div>
+                
+                <button type="submit">Visualizar Dívidas</button>
+                
+                <div class="mensagem-erro" id="erroMensagem">
+                    Senha incorreta. Verifique e tente novamente.
+                </div>
+            </form>
+        </div>
+
+        <footer class="footer-signature">
+            Por: **Lucas Coelho**, 2025
+        </footer>
+    </div>
+
+    <script>
+        // =================================================================
+        // 1. CONFIGURAÇÃO DE SENHAS E LINKS
+        // =================================================================
+        const senhasELinks = {
+            // Links das planilhas publicadas (pubhtml)
+            "1274": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzB1hnQZN3e3WF6e3h1i1Uzpp_iyTjFFj_RWybBKkB0XMTK178W6arjbFRh0WetmdOoDyxhjia6-m/pubhtml?gid=1522031752&single=true",
+            "9406": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzB1hnQZN3e3WF6e3h1i1Uzpp_iyTjFFj_RWybBKkB0XMTK178W6arjbFRh0WetmdOoDyxhjia6-m/pubhtml?gid=1634478111&single=true",
+            "3168": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzB1hnQZN3e3WF6e3h1i1Uzpp_iyTjFFj_RWybBKkB0XMTK178W6arjbFRh0WetmdOoDyxhjia6-m/pubhtml?gid=1202405103&single=true",
+            "7521": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzB1hnQZN3e3WF6e3h1i1Uzpp_iyTjFFj_RWybBKkB0XMTK178W6arjbFRh0WetmdOoDyxhjia6-m/pubhtml?gid=1821328718&single=true",
+            "6042": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzB1hnQZN3e3WF6e3h1i1Uzpp_iyTjFFj_RWybBKkB0XMTK178W6arjbFRh0WetmdOoDyxhjia6-m/pubhtml?gid=1912616329&single=true"
+        };
+        // =================================================================
+        
+        const form = document.getElementById('loginForm');
+        const senhaInput = document.getElementById('senha');
+        const erroMensagem = document.getElementById('erroMensagem');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); 
+            const senhaDigitada = senhaInput.value.trim();
+
+            if (senhasELinks.hasOwnProperty(senhaDigitada)) {
+                erroMensagem.classList.remove('show');
+                window.location.href = senhasELinks[senhaDigitada];
+            } else {
+                erroMensagem.classList.add('show');
+                senhaInput.value = ''; 
+                senhaInput.focus(); 
+            }
+        });
+    </script>
+
+</body>
+</html>
