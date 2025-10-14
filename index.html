@@ -1,251 +1,191 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dívidas - Mega Mix</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    
-    <style>
-        /* Variáveis de Cores: Dark Mode com Destaque Amarelo (Logo GRUPO MEGA) */
-        :root {
-            --cor-principal: #FFC100; /* Amarelo Vibrante da logo (Ação/Título) */
-            --cor-botao-hover: #FFA000; /* Laranja/Amarelo mais escuro */
-            --cor-fundo-principal: #1F2937; /* Azul Marinho Escuro (Fundo do Body) */
-            --cor-fundo-superior: #2A3543; /* Azul Escuro Curvado (Topo) */
-            --cor-card: #374151; /* Azul Escuro Suave (Fundo da Caixa) */
-            --cor-texto-claro: #E5E7EB; /* Texto Principal (Claro) */
-            --cor-texto-secundario: #9CA3AF; /* Subtítulos/Rodapé */
-            --cor-sombra: rgba(0, 0, 0, 0.4); 
-            --tempo-animacao: 0.8s; 
-            --tempo-transicao: 0.25s; 
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dívidas - Mega Mix</title>
 
-        body {
-            font-family: 'Inter', sans-serif; 
-            background-color: var(--cor-fundo-principal); 
-            color: var(--cor-texto-claro);
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column; 
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            overflow: hidden; 
-            position: relative;
-        }
-        
-        /* Pseudo-elemento para criar o design de topo curvado/ondulado */
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 45%; 
-            background-color: var(--cor-fundo-superior); 
-            /* Cria a curva na parte inferior (similar ao design moderno) */
-            border-bottom-left-radius: 50% 10%;
-            border-bottom-right-radius: 50% 10%;
-            z-index: 1; 
-        }
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 
-        .page-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center; 
-            height: 100vh;
-            z-index: 2; 
-        }
+<style>
+:root {
+  --azul-escuro: #1b2432;
+  --branco: #ffffff;
+  --cinza-claro: #d1d5db;
+  --texto: #f1f5f9;
+  --borda-input: #94a3b8;
+  --fonte-principal: 'Inter', sans-serif;
+  --fonte-titulo: 'Playfair Display', serif;
+}
 
-        .login-box {
-            background-color: var(--cor-card); 
-            padding: 45px 40px; 
-            border-radius: 25px; 
-            /* Sombra escura elegante */
-            box-shadow: 0 10px 25px var(--cor-sombra);
-            text-align: center;
-            width: 90%;
-            max-width: 420px; 
-            animation: fadeInScale var(--tempo-animacao) ease-out forwards; 
-            z-index: 10;
-            margin-bottom: 20px; 
-        }
+body {
+  margin: 0;
+  height: 100vh;
+  background: var(--branco);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: var(--fonte-principal);
+}
 
-        /* Animação de entrada */
-        @keyframes fadeInScale {
-            from { opacity: 0; transform: translateY(60px) scale(0.9); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        .logo {
-            max-width: 120px;
-            height: auto;
-            margin-bottom: 25px;
-            animation: fadeIn 1s ease-out forwards; 
-            animation-delay: 0.1s; 
-        }
+/* Cartão central */
+.container {
+  width: 340px;
+  background: var(--azul-escuro);
+  border-radius: 25px;
+  padding: 50px 30px;
+  color: var(--texto);
+  position: relative;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  overflow: hidden;
+}
 
-        h1 {
-            font-family: 'Playfair Display', serif; 
-            font-size: 2.6em; 
-            color: var(--cor-principal); /* Título em Amarelo */
-            margin-bottom: 8px;
-            font-weight: 700;
-            letter-spacing: 0.8px;
-        }
+/* Curva inferior branca */
+.container::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 120%;
+  height: 40%;
+  background: var(--branco);
+  border-top-left-radius: 100% 60%;
+  border-top-right-radius: 100% 60%;
+}
 
-        p.subtitulo {
-            color: var(--cor-texto-secundario);
-            margin-bottom: 40px; 
-            font-size: 1.0em;
-        }
+/* Conteúdo principal */
+header {
+  position: relative;
+  z-index: 2;
+}
 
-        input[type="password"] {
-            width: 100%;
-            padding: 16px 15px; 
-            border: 1px solid var(--cor-fundo-superior); /* Borda sutil escura */
-            background-color: var(--cor-fundo-superior); /* Input ligeiramente mais escuro que a caixa */
-            border-radius: 10px; 
-            box-sizing: border-box;
-            font-size: 1.1em;
-            font-weight: 500;
-            color: var(--cor-texto-claro);
-            transition: all var(--tempo-transicao) ease-in-out;
-        }
+h1 {
+  font-family: var(--fonte-titulo);
+  font-size: 2em;
+  margin-bottom: 8px;
+}
 
-        input[type="password"]:focus {
-            outline: none;
-            /* Foco com borda amarela (Amarelo da Logo) */
-            border-color: var(--cor-principal); 
-            box-shadow: 0 0 0 2px var(--cor-principal);
-        }
+p {
+  font-size: 0.95em;
+  color: var(--cinza-claro);
+  margin-bottom: 35px;
+}
 
-        button {
-            width: 100%;
-            padding: 16px;
-            background-color: var(--cor-principal); /* Botão em Amarelo */
-            color: var(--cor-fundo-principal); /* Texto do botão em Azul Escuro */
-            border: none;
-            border-radius: 10px; 
-            font-size: 1.25em; 
-            font-weight: 700; /* Mais negrito */
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(255, 193, 0, 0.5); /* Sombra Amarela */
-            transition: all var(--tempo-transicao) ease; 
-        }
+input[type="password"] {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid var(--borda-input);
+  background: transparent;
+  color: var(--branco);
+  padding: 10px 0;
+  font-size: 1em;
+  margin-bottom: 25px;
+  outline: none;
+  transition: border-color 0.3s;
+}
 
-        button:hover {
-            background-color: var(--cor-botao-hover); 
-            transform: translateY(-2px); 
-            box-shadow: 0 8px 20px rgba(255, 193, 0, 0.7);
-        }
-        
-        button:active {
-            transform: translateY(0); 
-            box-shadow: 0 2px 5px rgba(255, 193, 0, 0.4);
-            background-color: var(--cor-botao-hover);
-        }
+input[type="password"]:focus {
+  border-color: var(--branco);
+}
 
-        .mensagem-erro {
-            color: #FED7D7;
-            background-color: #A03232;
-            border: 1px solid #FC8181;
-            padding: 12px;
-            border-radius: 8px;
-            margin-top: 25px;
-            font-weight: 500;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.5s ease;
-        }
+button {
+  width: 100%;
+  background: var(--branco);
+  color: var(--azul-escuro);
+  border: none;
+  border-radius: 999px;
+  padding: 14px 0;
+  font-size: 1.05em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
 
-        .mensagem-erro.show {
-            opacity: 1;
-            visibility: visible;
-        }
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(255,255,255,0.2);
+}
 
-        .footer-signature {
-            margin-top: 20px; 
-            color: var(--cor-texto-secundario);
-            font-size: 0.9em;
-            opacity: 0.8;
-            text-align: center;
-            animation: fadeIn 0.7s ease-out forwards; 
-            animation-delay: 0.3s;
-            z-index: 10;
-        }
-    </style>
+button:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.mensagem-erro {
+  margin-top: 18px;
+  font-size: 0.9em;
+  color: #fecaca;
+  background-color: rgba(254,202,202,0.1);
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+}
+
+.mensagem-erro.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.footer {
+  position: relative;
+  z-index: 2;
+  margin-top: 35px;
+  font-size: 0.8em;
+  color: var(--cinza-claro);
+  text-align: center;
+}
+</style>
 </head>
+
 <body>
-    
-    <div class="page-content">
-        <div class="login-box">
-            <header>
-                
-                <img src="GRUPO.png" alt="Grupo Mega Logo" class="logo">
-                
-                <h1>Dívidas - Mega Mix</h1>
-                <p class="subtitulo">Acesse seu extrato digitando sua senha pessoal.</p>
-            </header>
+<div class="container">
+  <header>
+    <h1>Dívidas</h1>
+    <p>Digite sua senha pessoal para acessar.</p>
+  </header>
 
-            <form id="loginForm">
-                <div class="input-group">
-                    <input type="password" id="senha" placeholder="Digite sua senha (4 dígitos)" maxlength="4" required>
-                </div>
-                
-                <button type="submit">Visualizar Dívidas</button>
-                
-                <div class="mensagem-erro" id="erroMensagem">
-                    Senha incorreta. Verifique e tente novamente.
-                </div>
-            </form>
-        </div>
+  <form id="loginForm">
+    <input type="password" id="senha" placeholder="Senha (4 dígitos)" maxlength="4" required>
+    <button type="submit">Visualizar Dívidas</button>
+    <div class="mensagem-erro" id="erroMensagem">Senha incorreta. Tente novamente.</div>
+  </form>
 
-        <footer class="footer-signature">
-            Por: **Lucas Coelho**, 2025
-        </footer>
-    </div>
+  <div class="footer">© Lucas Coelho, 2025</div>
+</div>
 
-    <script>
-        // =================================================================
-        // 1. CONFIGURAÇÃO DE SENHAS E LINKS
-        // =================================================================
-        const senhasELinks = {
-            "1274": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzB1hnQZN3e3WF6e3h1i1Uzpp_iyTjFFj_RWybBKkB0XMTK178W6arjbFRh0WetmdOoDyxhjia6-m/pubhtml?gid=1522031752&single=true",
-            "9406": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzB1hnQZN3e3WF6e3h1i1Uzpp_iyTjFFj_RWybBKkB0XMTK178W6arjbFRh0WetmdOoDyxhjia6-m/pubhtml?gid=1634478111&single=true",
-            "3168": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzB1hnQZN3e3WF6e3h1i1Uzpp_iyTjFFj_RWybBKkB0XMTK178W6arjbFRh0WetmdOoDyxhjia6-m/pubhtml?gid=1202405103&single=true",
-            "7521": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzB1hnQZN3e3WF6e3h1i1Uzpp_iyTjFFj_RWybBKkB0XMTK178W6arjbFRh0WetmdOoDyxhjia6-m/pubhtml?gid=1821328718&single=true",
-            "6042": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzB1hnQZN3e3WF6e3h1i1Uzpp_iyTjFFj_RWybBKkB0XMTK178W6arjbFRh0WetmdOoDyxhjia6-m/pubhtml?gid=1912616329&single=true"
-        };
-        // =================================================================
-        
-        const form = document.getElementById('loginForm');
-        const senhaInput = document.getElementById('senha');
-        const erroMensagem = document.getElementById('erroMensagem');
+<script>
+const senhasELinks = {
+  "1274": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzB1hnQZN3e3WF6e3h1i1Uzpp_iyTjFFj_RWybBKkB0XMTK178W6arjbFRh0WetmdOoDyxhjia6-m/pubhtml?gid=1522031752&single=true",
+  "9406": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzB1hnQZN3e3WF6e3h1i1Uzpp_iyTjFFj_RWybBKkB0XMTK178W6arjbFRh0WetmdOoDyxhjia6-m/pubhtml?gid=1634478111&single=true",
+  "3168": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzB1hnQZN3e3WF6e3h1i1Uzpp_iyTjFFj_RWybBKkB0XMTK178W6arjbFRh0WetmdOoDyxhjia6-m/pubhtml?gid=1202405103&single=true",
+  "7521": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzB1hnQZN3e3WF6e3h1i1Uzpp_iyTjFFj_RWybBKkB0XMTK178W6arjbFRh0WetmdOoDyxhjia6-m/pubhtml?gid=1821328718&single=true",
+  "6042": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzB1hnQZN3e3WF6e3h1i1Uzpp_iyTjFFj_RWybBKkB0XMTK178W6arjbFRh0WetmdOoDyxhjia6-m/pubhtml?gid=1912616329&single=true"
+};
 
-        form.addEventListener('submit', function(e) {
-            e.preventDefault(); 
-            const senhaDigitada = senhaInput.value.trim();
+const form = document.getElementById('loginForm');
+const senhaInput = document.getElementById('senha');
+const erroMensagem = document.getElementById('erroMensagem');
 
-            if (senhasELinks.hasOwnProperty(senhaDigitada)) {
-                erroMensagem.classList.remove('show');
-                window.location.href = senhasELinks[senhaDigitada];
-            } else {
-                erroMensagem.classList.add('show');
-                senhaInput.value = ''; 
-                senhaInput.focus(); 
-            }
-        });
-    </script>
+senhaInput.addEventListener('input', () => {
+  senhaInput.value = senhaInput.value.replace(/\D/g, '');
+  if (senhaInput.value.length === 4) form.requestSubmit();
+});
 
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  const senhaDigitada = senhaInput.value.trim();
+  if (senhasELinks[senhaDigitada]) {
+    erroMensagem.classList.remove('show');
+    window.location.href = senhasELinks[senhaDigitada];
+  } else {
+    erroMensagem.classList.add('show');
+    senhaInput.value = '';
+    senhaInput.focus();
+  }
+});
+</script>
 </body>
 </html>
