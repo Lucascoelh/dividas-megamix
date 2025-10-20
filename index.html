@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dívidas - Mega Mix</title>
+    <title>Dívidas - Mega Mix - Link Atualizado!</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     
@@ -51,6 +51,8 @@
             overflow: hidden;
             position: relative;
             animation: fadeInScale 0.8s ease-out forwards; 
+            /* ALTURA AJUSTADA PARA A MENSAGEM DE AVISO */
+            min-height: 400px; 
         }
 
         @keyframes fadeInScale {
@@ -58,23 +60,33 @@
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
+        /* ======================================================= */
+        /* NOVO: BLOCO DE AVISO DE REDIRECIONAMENTO */
+        /* ======================================================= */
+        #aviso-atualizado {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #FF3B30; /* Vermelho de Alerta */
+            color: var(--branco);
+            padding: 10px 20px;
+            text-align: center;
+            font-weight: 600;
+            z-index: 10;
+            font-size: 14px;
+        }
+        
+        /* Estilos do Conteúdo Original (que agora está inativo, apenas como aviso) */
         .conteudo {
             padding: 40px 30px 100px; 
             color: var(--cor-texto-claro);
             position: relative;
             z-index: 2;
+            opacity: 0.5; /* Deixa o conteúdo original semi-transparente */
+            pointer-events: none; /* Desabilita cliques no formulário original */
         }
         
-        /* ======================================================= */
-        /* LOGO E TÍTULOS */
-        /* ======================================================= */
-        .logo {
-            width: 80px; 
-            height: auto;
-            margin-bottom: 25px;
-            filter: drop-shadow(0 0 5px rgba(255, 193, 0, 0.2)); 
-        }
-
         h1 {
             font-family: 'Playfair Display', serif; 
             font-size: 32px;
@@ -88,34 +100,14 @@
             color: var(--cor-texto-secundario);
             margin-bottom: 35px;
         }
-
-        /* ======================================================= */
-        /* INPUT DE SENHA */
-        /* ======================================================= */
-        input[type="password"] {
-            width: 100%;
-            padding: 10px 0;
-            font-size: 16px;
-            color: var(--cor-texto-claro);
-            background: transparent;
-            border: none;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.2); 
-            outline: none;
-            /* Margem inferior para separar do final do form */
-            margin-bottom: 35px; 
-            transition: border-color 0.3s ease;
-        }
-
-        input[type="password"]:focus {
-            border-bottom-color: var(--cor-principal); 
-        }
-
-        input::placeholder {
-            color: var(--cor-texto-secundario);
-        }
         
+        /* Oculta os elementos de formulário, pois não serão usados aqui */
+        #formSenha, button {
+            display: none !important;
+        }
+
         /* ======================================================= */
-        /* ONDA, BOTÃO E RODAPÉ (Sem Alteração) */
+        /* ONDA E RODAPÉ */
         /* ======================================================= */
         .onda {
             position: absolute;
@@ -129,37 +121,6 @@
             z-index: 1;
         }
 
-        button {
-            position: absolute;
-            bottom: 60px; 
-            left: 50%;
-            transform: translateX(-50%);
-            width: 85%;
-            background: var(--cor-principal); 
-            color: var(--azul-escuro); 
-            font-size: 17px;
-            font-weight: 700;
-            border: none;
-            padding: 15px 0;
-            border-radius: 50px;
-            cursor: pointer;
-            z-index: 3;
-            box-shadow: 0 5px 15px rgba(255, 193, 0, 0.4);
-            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
-        }
-
-        button:hover {
-            background-color: var(--cor-botao-hover);
-            transform: translate(-50%, -2px);
-            box-shadow: 0 8px 20px rgba(255, 193, 0, 0.6);
-        }
-        
-        button:active {
-            transform: translateX(-50%); 
-            box-shadow: 0 2px 5px rgba(255, 193, 0, 0.4);
-            background-color: var(--cor-botao-hover);
-        }
-
         footer {
             text-align: center;
             font-size: 12px;
@@ -171,33 +132,45 @@
             width: 100%;
             z-index: 2;
         }
-
-        /* ======================================================= */
-        /* MENSAGEM DE ERRO (POSICIONAMENTO ACIMA DO INPUT) */
-        /* ======================================================= */
-        .mensagem-erro {
-            color: #ff7b7b;
-            font-size: 13px;
-            text-align: center;
-            /* Margem para separar do subtítulo acima e do input abaixo */
-            margin-top: -25px; /* Puxa para cima para ficar mais próximo do subtítulo */
-            margin-bottom: 20px; /* Espaço entre o erro e o input */
-            /* Estado Inicial: Oculto e sem ocupar espaço */
-            visibility: hidden; 
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
         
-        .mensagem-erro.show {
-            /* ESTADO VISÍVEL */
-            visibility: visible; 
-            opacity: 1; 
+        /* Estilo da mensagem principal de redirecionamento */
+        .redirect-message {
+            text-align: center;
+            padding-top: 100px;
+            font-size: 1.1em;
+            color: var(--cor-texto-claro);
+            z-index: 3;
+            position: relative;
+        }
+        .redirect-message p {
+            margin-bottom: 10px;
+            color: #FFC100;
+            font-weight: 600;
+        }
+        .redirect-message a {
+            color: #007BFF;
+            text-decoration: none;
+            font-weight: 700;
+            display: block;
+            margin-top: 15px;
         }
     </style>
 </head>
-<body>
+<body> 
 
 <div class="card">
+    <div id="aviso-atualizado">
+        🚨 ATENÇÃO: Link Atualizado! Redirecionando em <span id="contador">10</span>s...
+    </div>
+    
+    <div class="redirect-message">
+        <p>Este link foi desativado.</p>
+        <p>Acesse o novo endereço para visualizar seu extrato de dívidas:</p>
+        <a href="https://lucascoelhu.github.io/dividas-megamix/">
+            Ir para a NOVA página
+        </a>
+    </div>
+
     <div class="conteudo">
         
         <img src="GRUPO.png" alt="Grupo Mega Logo" class="logo">
@@ -222,47 +195,30 @@
 
 <script>
     // =================================================================
-    // 1. CONFIGURAÇÃO DE SENHAS E LINKS
+    // REDIRECIONAMENTO AUTOMÁTICO PARA O NOVO LINK
     // =================================================================
-    const senhasELinks = {
-        "1274": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzB1hnQZN3e3WF6e3h1i1Uzpp_iyTjFFj_RWybBKkB0XMTK178W6arjbFRh0WetmdOoDyxhjia6-m/pubhtml?gid=1522031752&single=true",
-        "9406": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzB1hnQZN3e3WF6e3h1i1Uzpp_iyTjFFj_RWybBKkB0XMTK178W6arjbFRh0WetmdOoDyxhjia6-m/pubhtml?gid=1634478111&single=true",
-        "3168": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzB1hnQZN3e3WF6e3h1i1Uzpp_iyTjFFj_RWybBKkB0XMTK178W6arjbFRh0WetmdOoDyxhjia6-m/pubhtml?gid=1202405103&single=true",
-        "7521": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzB1hnQZN3e3WF6e3h1i1Uzpp_iyTjFFj_RWybBKkB0XMTK178W6arjbFRh0WetmdOoDyxhjia6-m/pubhtml?gid=1821328718&single=true",
-        "6042": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzB1hnQZN3e3WF6e3h1i1Uzpp_iyTjFFj_RWybBKkB0XMTK178W6arjbFRh0WetmdOoDyxhjia6-m/pubhtml?gid=1912616329&single=true",
-        "2715": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzB1hnQZN3e3WF6e3h1i1Uzpp_iyTjFFj_RWybBKkB0XMTK178W6arjbFRh0WetmdOoDyxhjia6-m/pubhtml?gid=1416586430&single=true",
-        "5839": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzB1hnQZN3e3WF6e3h1i1Uzpp_iyTjFFj_RWybBKkB0XMTK178W6arjbFRh0WetmdOoDyxhjia6-m/pubhtml?gid=1936400613&single=true",
-        "8493": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzB1hnQZN3e3WF6e3h1i1Uzpp_iyTjFFj_RWybBKkB0XMTK178W6arjbFRh0WetmdOoDyxhjia6-m/pubhtml?gid=868500341&single=true"
-    };
-    // =================================================================
-    
-    const form = document.getElementById('formSenha');
-    const senhaInput = document.getElementById('senha');
-    const mensagemErro = document.getElementById('mensagemErro');
+    const novoLink = "https://lucascoelhu.github.io/dividas-megamix/";
+    let tempoRestante = 5;
+    const contadorElement = document.getElementById('contador');
 
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const senhaDigitada = senhaInput.value.trim();
-
-        if (senhasELinks.hasOwnProperty(senhaDigitada)) {
-            // Se CORRETO, esconde a mensagem e redireciona
-            mensagemErro.classList.remove('show');
-            window.location.href = senhasELinks[senhaDigitada];
+    // Função que faz a contagem regressiva e redireciona
+    function iniciarRedirecionamento() {
+        if (tempoRestante > 0) {
+            contadorElement.textContent = tempoRestante;
+            tempoRestante--;
+            setTimeout(iniciarRedirecionamento, 1000);
         } else {
-            // Se INCORRETO, exibe a mensagem, limpa o campo e foca para nova tentativa
-            mensagemErro.classList.add('show');
-            senhaInput.value = '';
-            senhaInput.focus();
+            // Quando o tempo zera, redireciona
+            window.location.href = novoLink;
         }
-    });
+    }
+
+    // Inicia a contagem assim que a página é carregada
+    window.onload = iniciarRedirecionamento;
     
-    // Limpa a mensagem de erro assim que o usuário começa a digitar novamente
-    senhaInput.addEventListener('input', () => {
-        senhaInput.value = senhaInput.value.replace(/\D/g, '');
-        mensagemErro.classList.remove('show');
-    });
+    // NOTA: A lógica original de senhas foi removida/desativada
+    // para garantir que o usuário vá para o link correto.
 </script>
 
 </body>
 </html>
-
